@@ -8,7 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
 import org.testng.asserts.Assertion;
 
-public class FirstSeleniumTest {
+public class FirstSeleniumTest extends TestShopScenario {
 
     @Test
 
@@ -19,8 +19,8 @@ public class FirstSeleniumTest {
         int nrofFound = 0;
         String urlTest = "techblog.polteq.com/testshop/index.php";
 
-        ChromeDriverManager.getInstance().setup();
-        WebDriver driver = new ChromeDriver();
+        //ChromeDriverManager.getInstance().setup();
+        //WebDriver driver = new ChromeDriver();
         driver.get("https://" + urlTest);
         urlFound = driver.getCurrentUrl();
 

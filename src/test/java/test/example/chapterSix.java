@@ -7,9 +7,12 @@ import org.assertj.core.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
-public class chapterSix {
+public class chapterSix extends TestShopScenario {
     public void chapterSix() {
     }
 
@@ -18,10 +21,10 @@ public class chapterSix {
     public void emptyCartTest() {
 
         String account = "";
-        String urlTest = "techblog.polteq.com/testshop/index.php";
-        ChromeDriverManager.getInstance().setup();
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://" + urlTest);
+        //String urlTest = "techblog.polteq.com/testshop/index.php";
+        //ChromeDriverManager.getInstance().setup();
+        //WebDriver driver = new ChromeDriver();
+        //driver.get("https://" + urlTest);
         driver.manage().window().maximize();
         driver.findElement(By.className("login")).click();
         driver.findElement(By.id("email")).sendKeys(new CharSequence[]{"renze.klamer@polteq.com"});
@@ -33,10 +36,17 @@ public class chapterSix {
         //Assertions.assertThat(emptyCar).as("geenm lege car").isTrue();
         driver.findElement(By.cssSelector("[class='tag_level3 first_item']")).click();
         driver.findElement(By.cssSelector("[alt='iPod shuffle']")).click();
-        driver.findElement(By.cssSelector("[alt='iPod shuffle']")).click();
+        driver.findElement(By.cssSelector("[id='add_to_cart']")).click();
+        WebDriverWait wait = new WebDriverWait(driver, 3);
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.cssSelector("[class='continue btn btn-default button exclusive-medium']"))));
+        driver.findElement(By.cssSelector("[class='continue btn btn-default button exclusive-medium']")).click();
+        driver.findElement(By.cssSelector("[<span class='ajax_cart_quantity unvisible' style='display: inline;'>1</span>]")).click();
+//<span class='ajax_cart_quantity unvisible' style='display: inline;'>1</span>
+        //class="ajax_cart_quantity unvisible"
 
-//        Add to cart
-        //ajax_cart_no_product
+        //[class='continue btn btn-default button exclusive-medium']
+
+
     }
 
     @Test
@@ -44,10 +54,10 @@ public class chapterSix {
         String account = "";
         boolean siteFound = false;
 
-        String urlTest = "techblog.polteq.com/testshop/index.php";
-        ChromeDriverManager.getInstance().setup();
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://" + urlTest);
+        //String urlTest = "techblog.polteq.com/testshop/index.php";
+        //ChromeDriverManager.getInstance().setup();
+        //WebDriver driver = new ChromeDriver();
+        //driver.get("https://" + urlTest);
         driver.findElement(By.className("login")).click();
         driver.findElement(By.id("email")).sendKeys(new CharSequence[]{"renze.klamer@polteq.com"});
         driver.findElement(By.id("passwd")).sendKeys(new CharSequence[]{"Mijn-1956"});
