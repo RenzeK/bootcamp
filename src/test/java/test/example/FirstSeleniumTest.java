@@ -22,7 +22,7 @@ public class FirstSeleniumTest {
         ChromeDriverManager.getInstance().setup();
         WebDriver driver = new ChromeDriver();
         driver.get("https://" + urlTest);
-        urlFound = driver.getCurrentUrl().contains(urlTest);
+        urlFound = driver.getCurrentUrl();
 
         if (urlFound.contains(urlTest))
             siteFound = true;
@@ -42,4 +42,6 @@ public class FirstSeleniumTest {
         driver.quit();
         System.out.println(account + " is het gelukt");
     }
+
+
 }
