@@ -24,6 +24,6 @@ public class TestShopScenario {
 
     @AfterMethod(alwaysRun = true)
     public void tearmeDown() {
-        driver.quit();
+      // driver.quit();
     }
 }

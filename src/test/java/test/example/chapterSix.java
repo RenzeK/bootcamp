@@ -15,16 +15,21 @@ import org.testng.annotations.Test;
 public class chapterSix extends TestShopScenario {
     public void chapterSix() {
     }
+@Test
+public void AdjustPersonalInfoTest() {
 
+}
 
     @Test
-    public void emptyCartTest() {
+    public void emptyCartTest() throws InterruptedException {
 
         String account = "";
         //String urlTest = "techblog.polteq.com/testshop/index.php";
         //ChromeDriverManager.getInstance().setup();
         //WebDriver driver = new ChromeDriver();
         //driver.get("https://" + urlTest);
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+
         driver.manage().window().maximize();
         driver.findElement(By.className("login")).click();
         driver.findElement(By.id("email")).sendKeys(new CharSequence[]{"renze.klamer@polteq.com"});
@@ -37,16 +42,20 @@ public class chapterSix extends TestShopScenario {
         driver.findElement(By.cssSelector("[class='tag_level3 first_item']")).click();
         driver.findElement(By.cssSelector("[alt='iPod shuffle']")).click();
         driver.findElement(By.cssSelector("[id='add_to_cart']")).click();
-        WebDriverWait wait = new WebDriverWait(driver, 3);
+
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.cssSelector("[class='continue btn btn-default button exclusive-medium']"))));
         driver.findElement(By.cssSelector("[class='continue btn btn-default button exclusive-medium']")).click();
-        driver.findElement(By.cssSelector("[<span class='ajax_cart_quantity unvisible' style='display: inline;'>1</span>]")).click();
-//<span class='ajax_cart_quantity unvisible' style='display: inline;'>1</span>
-        //class="ajax_cart_quantity unvisible"
-
-        //[class='continue btn btn-default button exclusive-medium']
-
-
+        Thread.sleep(1000);
+        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.cssSelector("[title='View my shopping cart']"))));
+        driver.findElement(By.cssSelector("[title='View my shopping cart']")).click();
+        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.cssSelector("[class='cart_quantity_delete']"))));
+        driver.findElement(By.cssSelector("[class='cart_quantity_delete']")).click();
+        //Thread.sleep(1000);
+        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.cssSelector("[title='View my shopping cart']"))));
+         driver.findElement(By.cssSelector("[title='View my shopping cart']")).click();
+        String inhoudCart = driver.findElement(By.cssSelector("[title='View my shopping cart']")).getText();
+        System.out.println(inhoudCart);
+        Assertions.assertThat(inhoudCart).as("niet leeg").contains("empty");
     }
 
     @Test
