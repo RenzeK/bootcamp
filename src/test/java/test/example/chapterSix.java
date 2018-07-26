@@ -6,6 +6,7 @@ import org.assertj.core.api.AbstractCharSequenceAssert;
 import org.assertj.core.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -15,10 +16,40 @@ import org.testng.annotations.Test;
 public class chapterSix extends TestShopScenario {
     public void chapterSix() {
     }
-@Test
-public void AdjustPersonalInfoTest() {
 
-}
+    @Test
+    public void AdjustPersonalInfoTest() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        String initialName = "Renze";
+        String geheim = "Mijn-1956";
+        String accountName = "";
+        driver.manage().window().maximize();
+        driver.findElement(By.className("login")).click();
+        driver.findElement(By.id("email")).sendKeys("renze.klamer@polteq.com");
+        driver.findElement(By.id("passwd")).sendKeys(geheim);
+        driver.findElement(By.id("SubmitLogin")).click();
+        String account = driver.findElement(By.className("account")).getText();
+        driver.findElement(By.className("account")).click();
+        driver.findElement(By.className("icon-user")).click();
+        WebElement firstName = driver.findElement(By.id("firstname"));
+        String currentFirstName = firstName.findElement(By.id("firstname")).getAttribute("value");
+        driver.findElement(By.id("firstname")).clear();
+        System.out.println("was:" + currentFirstName);
+
+        if (currentFirstName.equals(initialName)) {
+            driver.findElement(By.id("firstname")).sendKeys("ezneR");
+        } else {
+            driver.findElement(By.id("firstname")).sendKeys(initialName);
+        }
+        driver.findElement(By.cssSelector("[name='old_passwd']")).sendKeys(geheim);
+        //Thread.sleep(3000);
+        driver.findElement(By.cssSelector("[name='submitIdentity']")).click();
+        String resultaat = driver.findElement(By.cssSelector(".alert.alert-success")).getText();
+        Assertions.assertThat(resultaat.contains("successfully")).as("update failes").isTrue();
+        //Thread.sleep(3000);
+        Assertions.assertThat(account.contains(driver.findElement(By.className("account")).getText())).as("geen wijziging").isFalse();
+
+    }
 
     @Test
     public void emptyCartTest() throws InterruptedException {
@@ -52,7 +83,7 @@ public void AdjustPersonalInfoTest() {
         driver.findElement(By.cssSelector("[class='cart_quantity_delete']")).click();
         //Thread.sleep(1000);
         wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.cssSelector("[title='View my shopping cart']"))));
-         driver.findElement(By.cssSelector("[title='View my shopping cart']")).click();
+        driver.findElement(By.cssSelector("[title='View my shopping cart']")).click();
         String inhoudCart = driver.findElement(By.cssSelector("[title='View my shopping cart']")).getText();
         System.out.println(inhoudCart);
         Assertions.assertThat(inhoudCart).as("niet leeg").contains("empty");
