@@ -34,6 +34,6 @@ return myaccount;
 
     @AfterMethod(alwaysRun = true)
     public void tearmeDown() {
-      // driver.quit();
+       driver.quit();
     }
 }

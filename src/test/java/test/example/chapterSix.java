@@ -67,7 +67,7 @@ public class chapterSix extends TestShopScenario {
         driver.findElement(By.id("passwd")).sendKeys(new CharSequence[]{"Mijn-1956"});
         driver.findElement(By.id("SubmitLogin")).click();
         account = driver.findElement(By.className("account")).getText();
-        ((AbstractCharSequenceAssert) Assertions.assertThat(account).as("user logged on", new Object[0])).contains(new CharSequence[]{"Renze"});
+        ((AbstractCharSequenceAssert) Assertions.assertThat(account).as("user logged on", new Object[0])).contains(new CharSequence[]{"Klamer"});
         //boolean emptyCar = driver.findElement(By.id("ajax_cart_no_product")).isDisplayed();
         //Assertions.assertThat(emptyCar).as("geenm lege car").isTrue();
         driver.findElement(By.cssSelector("[class='tag_level3 first_item']")).click();
