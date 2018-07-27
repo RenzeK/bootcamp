@@ -10,11 +10,40 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 public class chapterSix extends TestShopScenario {
     public void chapterSix() {
+    }
+
+    @Test
+
+    public void ValidateSupplierProductTest() {
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        String initialName = "Renze";
+        String geheim = "Mijn-1956";
+        String artTeZoeken = "MacBook Air";
+        driver.manage().window().maximize();
+        driver.findElement(By.className("login")).click();
+        driver.findElement(By.id("email")).sendKeys("renze.klamer@polteq.com");
+        driver.findElement(By.id("passwd")).sendKeys(geheim);
+        driver.findElement(By.id("SubmitLogin")).click();
+        WebElement supplier = driver.findElement(By.cssSelector("[name='supplier_list']"));
+        new Select(supplier).selectByVisibleText("AppleStore");
+        WebElement articlesLijst = driver.findElement(By.cssSelector("[id='product_list']"));
+        Boolean gevonden = false;
+        List<WebElement> artikelen = articlesLijst.findElements(By.cssSelector("[class='product-container']"));
+        for (WebElement art : artikelen){
+            String artOms = art.findElement(By.cssSelector("[itemprop='name']")).getText();
+            //System.out.println(" art: " + artOms);
+            if (artOms.equals(artTeZoeken)) gevonden = true;
+        }
+        Assertions.assertThat(gevonden).as("Geen "+ artTeZoeken + " meer").isTrue();
+
     }
 
     @Test
@@ -34,7 +63,7 @@ public class chapterSix extends TestShopScenario {
         WebElement firstName = driver.findElement(By.id("firstname"));
         String currentFirstName = firstName.findElement(By.id("firstname")).getAttribute("value");
         driver.findElement(By.id("firstname")).clear();
-        System.out.println("was:" + currentFirstName);
+        //System.out.println("was:" + currentFirstName);
 
         if (currentFirstName.equals(initialName)) {
             driver.findElement(By.id("firstname")).sendKeys("ezneR");
