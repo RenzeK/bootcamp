@@ -4,27 +4,38 @@ import io.github.bonigarcia.wdm.ChromeDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 public class TestShopScenario {
 
     protected WebDriver driver;
-    public String logMeIn () {
+
+    public String logMeIn(String soortAccount) {
+        String emailAccount = "renze.klamer@polteq.com";
+        String passwordAccount = "Mijn-1956";
+
+        if (soortAccount.contains("wish")) {
+            emailAccount = "renze@klamer.com";
+            passwordAccount = "1qazxsw2";
+
+        }
         driver.manage().window().maximize();
         driver.findElement(By.className("login")).click();
-        driver.findElement(By.id("email")).sendKeys("renze.klamer@polteq.com");
-        driver.findElement(By.id("passwd")).sendKeys("Mijn-1956");
+        driver.findElement(By.id("email")).sendKeys(emailAccount);
+        driver.findElement(By.id("passwd")).sendKeys(passwordAccount);
         driver.findElement(By.id("SubmitLogin")).click();
+        //driver.manage().window().maximize();
         String myaccount = driver.findElement(By.className("account")).getText();
-return myaccount;
+        return myaccount;
     }
 
     @BeforeMethod(alwaysRun = true)
     public void setmeUp() {
         ChromeDriverManager.getInstance().setup();
         driver = new ChromeDriver();
-
+        //driver.manage().
         // open de website
         String urlTest = "https://techblog.polteq.com/testshop/index.php";
         driver.get(urlTest);
@@ -33,7 +44,12 @@ return myaccount;
 
 
     @AfterMethod(alwaysRun = true)
-    public void tearmeDown() {
-     //  driver.quit();
+    public void tearmeDown(ITestResult ifFailure) {
+        //  driver.quit();
+        if (ifFailure.getStatus() == ITestResult.SUCCESS) {
+            driver.quit();
+        }
+
     }
 }
+
