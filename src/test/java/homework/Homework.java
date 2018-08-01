@@ -77,7 +77,7 @@ public class Homework extends TestShopScenario {
             }
 
         }
-        System.out.println("gevonden in rij:" + aantalGevonden);
+        System.out.println("aantal maal "+ zoekWaarde+ " : " + aantalGevonden);
         return aantalGevonden;
     }
 /* //        WebElement wishTable = driver.findElement(By.cssSelector("[class='table table-bordered']"));
