@@ -9,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -21,32 +22,26 @@ public class BrowserFactoryAdvanced {
         CHROME,
         EDGE;
     }
+
     WebDriver driver;
-    public  WebDriver getDriver(BootCampBrowser browser) {
+
+    public WebDriver getDriver(BootCampBrowser browser) {
 
         switch ((browser)) {
             case FIREFOX:
-                FirefoxDriverManager.getInstance().setup();
-                driver = new FirefoxDriver();
-                break;
+              return createFirfoxBrowser();
             case IE:
                 System.out.println(" to do later not now");
-                break;
+                return createIEBrowser();
             case CHROME:
-                ChromeDriverManager.getInstance().setup();
-                driver = new ChromeDriver();
-                break;
+                return createChromeBrowser();
             //case "safari":
             case EDGE:
-                EdgeDriverManager.getInstance().setup();
-                driver = new EdgeDriver();
-                break;
+                return createEdgeBrowser();
             default:
-                ChromeDriverManager.getInstance().setup();
-                driver = new ChromeDriver();
-                break;
+                return createChromeBrowser();
         }
-        return driver ;
+//        return driver;
 
     }
 
@@ -78,6 +73,11 @@ public class BrowserFactoryAdvanced {
         return new InternetExplorerDriver();
     }
 
+    private  static WebDriver createFirfoxBrowser () {
+        FirefoxOptions options = new FirefoxOptions();
+        FirefoxDriverManager.getInstance().setup();
+        return new FirefoxDriver();
+    }
 
 }
 
