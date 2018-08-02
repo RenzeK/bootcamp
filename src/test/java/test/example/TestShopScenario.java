@@ -26,7 +26,7 @@ public class TestShopScenario {
         }
 
         driver.manage().window().maximize();
-        sleep(3333);
+        //sleep(333); //tobe used for IE??
         driver.findElement(By.className("login")).click();
         driver.findElement(By.id("email")).sendKeys(emailAccount);
         driver.findElement(By.id("passwd")).sendKeys(passwordAccount);
@@ -38,7 +38,7 @@ public class TestShopScenario {
 
     @BeforeMethod(alwaysRun = true)
     public void setmeUp() {
-        driver = BrowserFactoryBasic.getDriver("ie");
+        driver = BrowserFactoryBasic.getDriver("chrome");
         //driver.manage().
         // open de website
         String urlTest = "https://techblog.polteq.com/testshop/index.php";
