@@ -30,7 +30,7 @@ public class ContactUsPage {
 
     //TODO fix Select
     public void fillInContactForm(String subject, String email, String orderID, String message) {
-        fillInContactForm(subject, email, orderID, message);
+        fillInContactFormOnly(subject, email, orderID, message);
         driver.findElement(sendButton).click();
     }
 

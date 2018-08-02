@@ -25,11 +25,11 @@ public class BrowserFactoryAdvanced {
 
     WebDriver driver;
 
-    public WebDriver getDriver(BootCampBrowser browser) {
+    public static WebDriver getDriver(BootCampBrowser browser) {
 
         switch ((browser)) {
             case FIREFOX:
-              return createFirfoxBrowser();
+                return createFirfoxBrowser();
             case IE:
                 System.out.println(" to do later not now");
                 return createIEBrowser();
@@ -41,7 +41,6 @@ public class BrowserFactoryAdvanced {
             default:
                 return createChromeBrowser();
         }
-//        return driver;
 
     }
 
@@ -53,7 +52,7 @@ public class BrowserFactoryAdvanced {
         options.addArguments("ignore-certificate-errors");
         options.setCapability("chrome.switches", "--verbose");
         ChromeDriverManager.getInstance().setup();
-        return new ChromeDriver();
+        return new ChromeDriver(options);
     }
 
     private static WebDriver createEdgeBrowser() {
@@ -73,7 +72,7 @@ public class BrowserFactoryAdvanced {
         return new InternetExplorerDriver();
     }
 
-    private  static WebDriver createFirfoxBrowser () {
+    private static WebDriver createFirfoxBrowser() {
         FirefoxOptions options = new FirefoxOptions();
         FirefoxDriverManager.getInstance().setup();
         return new FirefoxDriver();

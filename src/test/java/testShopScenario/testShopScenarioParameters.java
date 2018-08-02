@@ -1,13 +1,14 @@
 package testShopScenario;
 
 import basic.BrowserFactoryAdvanced;
-import basic.BrowserFactoryBasic;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
+
+import java.util.concurrent.TimeUnit;
 
 import static java.lang.Thread.sleep;
 
@@ -37,24 +38,16 @@ public class testShopScenarioParameters {
         return myaccount;
     }
     @Parameters("browser")
+
     @BeforeMethod(alwaysRun = true)
- //public void setUp(BrowserFactoryAdvanced.browser browser){
+    public void setUp(String browser) {
 
- //       driver = BrowserFactoryAdvanced.getDriver(browser);
-   //     driver.get();
+        driver = BrowserFactoryAdvanced.getDriver(BrowserFactoryAdvanced.BootCampBrowser.valueOf(browser));
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-   // }
-
-
-    public void setmeUp() {
-        driver = BrowserFactoryBasic.getDriver("chrome");
-        //driver.manage().
-        // open de website
-        String urlTest = "https://techblog.polteq.com/testshop/index.php";
-        driver.get(urlTest);
-
+        driver.get("https://techblog.polteq.com/testshop/index.php");
     }
-
 
     @AfterMethod(alwaysRun = true)
     public void tearmeDown(ITestResult ifFailure) {

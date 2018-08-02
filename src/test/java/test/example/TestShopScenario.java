@@ -1,5 +1,7 @@
 package test.example;
 
+import basic.BrowserFactoryAdvanced;
+//import basic.BrowserFactoryMedior;
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,13 +9,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import basic.BrowserFactoryBasic;
+//import basic.BrowserFactoryBasic;
 
 import static java.lang.Thread.*;
 
 public class TestShopScenario {
 
-    protected WebDriver driver;
+    public WebDriver driver;
 
     public String logMeIn(String soortAccount) throws InterruptedException {
         String emailAccount = "renze.klamer@polteq.com";
@@ -37,8 +39,11 @@ public class TestShopScenario {
     }
 
     @BeforeMethod(alwaysRun = true)
-    public void setmeUp() {
-        driver = BrowserFactoryBasic.getDriver("chrome");
+    public void setmeUp(BrowserFactoryAdvanced.BootCampBrowser browser) {
+//        driver = BrowserFactoryAdvanced.getDriver(BrowserFactoryAdvanced.BootCampBrowser.CHROME );
+        driver = BrowserFactoryAdvanced.getDriver(browser );
+        //driver =BrowserFactoryMedior.getDriver("Chrome");
+        //driver = BrowserFactoryBasic.getDriver("chrome");
         //driver.manage().
         // open de website
         String urlTest = "https://techblog.polteq.com/testshop/index.php";

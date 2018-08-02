@@ -6,7 +6,13 @@
     <test name="FireFoxTest">
         <parameter name="browser" value="FIREFOX" />
         <classes>
-            <class name="testShopScenario.browserDrivenTest" />
+            <class name="testShopScenario.FillinContactFormTest" />
+        </classes>
+    </test>
+    <test name="ChromeTest">
+        <parameter name="browser" value="CHROME" />
+        <classes>
+            <class name="testShopScenario.FillinContactFormTest" />
         </classes>
     </test>
 </suite>
