@@ -26,7 +26,7 @@ public class TestShopScenario {
         }
 
         driver.manage().window().maximize();
-        //sleep(333); //tobe used for IE??
+        sleep(333); //tobe used for IE??
         driver.findElement(By.className("login")).click();
         driver.findElement(By.id("email")).sendKeys(emailAccount);
         driver.findElement(By.id("passwd")).sendKeys(passwordAccount);
