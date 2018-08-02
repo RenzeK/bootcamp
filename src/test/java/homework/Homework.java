@@ -22,6 +22,7 @@ public class Homework extends TestShopScenario {
         String teZoekenName = "No Pain";
         noPainRow = telStringInWish(teZoekenName, false);
         Assertions.assertThat(noPainRow).as("Geen wishes to deal with").isGreaterThan(0);
+
         if (noPainRow > 0) {
             noPainRow = telStringInWish(teZoekenName, true);
         }
@@ -30,7 +31,7 @@ public class Homework extends TestShopScenario {
         Assertions.assertThat(noPainRow).as("Not all wishes gone").isEqualTo(0);
         if (noPainRow == 0) {
             // geen No Pain meer over dus nieuwe voor de volgende keer
-            driver.findElement(By.cssSelector("#name")).sendKeys("No Pain");
+            driver.findElement(By.cssSelector("#name")).sendKeys(teZoekenName);
             driver.findElement(By.cssSelector("#submitWishlist")).click();
         }
         noPainRow = telStringInWish(teZoekenName, false);
@@ -41,7 +42,7 @@ public class Homework extends TestShopScenario {
 
 
     public int telStringInWish(String zoekWaarde, boolean deleteWish) throws StaleElementReferenceException, InterruptedException {
-        int maxLoop = 9;
+        int maxLoop = 3;
         int aantalGevonden = 0;
         while (maxLoop > 0) {
             try {

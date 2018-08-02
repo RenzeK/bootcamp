@@ -7,12 +7,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import basic.BrowserFactoryBasic;
+
+import static java.lang.Thread.*;
 
 public class TestShopScenario {
 
     protected WebDriver driver;
 
-    public String logMeIn(String soortAccount) {
+    public String logMeIn(String soortAccount) throws InterruptedException {
         String emailAccount = "renze.klamer@polteq.com";
         String passwordAccount = "Mijn-1956";
 
@@ -21,7 +24,9 @@ public class TestShopScenario {
             passwordAccount = "1qazxsw2";
 
         }
+
         driver.manage().window().maximize();
+        sleep(3333);
         driver.findElement(By.className("login")).click();
         driver.findElement(By.id("email")).sendKeys(emailAccount);
         driver.findElement(By.id("passwd")).sendKeys(passwordAccount);
@@ -33,8 +38,7 @@ public class TestShopScenario {
 
     @BeforeMethod(alwaysRun = true)
     public void setmeUp() {
-        ChromeDriverManager.getInstance().setup();
-        driver = new ChromeDriver();
+        driver = BrowserFactoryBasic.getDriver("ie");
         //driver.manage().
         // open de website
         String urlTest = "https://techblog.polteq.com/testshop/index.php";
