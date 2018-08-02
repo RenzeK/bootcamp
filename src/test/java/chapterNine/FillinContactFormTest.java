@@ -18,6 +18,7 @@ public class FillinContactFormTest extends test.example.TestShopScenario{
         contactFiller.fillInContactForm("rklamer@gmail.com","rklamer@gmail.com","333333", "eeeee");
         String resultContact = contactFiller.validationMessage();
         System.out.println("goed groen gegaan bij "+ resultContact);
+        // opnieuw aanroepen contact
         homePage.clickContactUS();
         contactFiller.fillInContactForm("rklamer@gmail.com","rklamer@gmail","333333", "eeeee");
         resultContact  = contactFiller.getInvalidEmailMessage();

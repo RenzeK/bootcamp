@@ -27,28 +27,34 @@ public class ContactUsPage {
         this.driver = driver;
 
     }
+
     //TODO fix Select
-    public void fillInContactForm(String subject, String email, String orderID, String message){
+    public void fillInContactForm(String subject, String email, String orderID, String message) {
+        fillInContactForm(subject, email, orderID, message);
+        driver.findElement(sendButton).click();
+    }
+
+    public void fillInContactFormOnly(String subject, String email, String orderID, String message) {
         Select subjectHeading = new Select(driver.findElement(By.cssSelector("select#id_contact")));
         subjectHeading.selectByVisibleText("Customer service");
         driver.findElement(emailTextField).sendKeys(email);
         driver.findElement(orderIdTextField).sendKeys(orderID);
         driver.findElement(messageTextField).sendKeys(message);
-        driver.findElement(sendButton).click();
     }
 
-    public String validationMessage(){
+
+    public String validationMessage() {
         WebElement alertMessageElement = (new WebDriverWait(driver, 10))
                 .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".alert.alert-success")));
 
         return alertMessageElement.getText();
     }
 
-    public String getInvalidEmailMessage(){
+    public String getInvalidEmailMessage() {
         return driver.findElement(invalidEmailElement).getText();
     }
 
-    public void fillInEmailAndClick(String email){
+    public void fillInEmailAndClick(String email) {
         driver.findElement(emailTextField).sendKeys(email);
         driver.findElement(orderIdTextField).click();
     }
