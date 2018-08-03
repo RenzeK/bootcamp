@@ -37,12 +37,14 @@ public class testShopScenarioParameters {
         String myaccount = driver.findElement(By.className("account")).getText();
         return myaccount;
     }
-    @Parameters("browser")
+//    @Parameters("browser")
 
     @BeforeMethod(alwaysRun = true)
-    public void setUp(String browser) {
+    public void setUp() {
 
-        driver = BrowserFactoryAdvanced.getDriver(BrowserFactoryAdvanced.BootCampBrowser.valueOf(browser));
+//        driver = BrowserFactoryAdvanced.getDriver(BrowserFactoryAdvanced.BootCampBrowser.valueOf(browser));
+        driver = BrowserFactoryAdvanced.getDriver(BrowserFactoryAdvanced.BootCampBrowser.CHROME);
+
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 

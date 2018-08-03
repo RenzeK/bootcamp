@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Suite" parallel="none">
+    <test name="dataVerificatie">
+        <parameter name="subject" value="bijn akleaa" />
+        <parameter name="email" value="rklamer@polteq.com" />
+        <parameter name="orderId" value="3333" />
+        <parameter name="message" value="rrfvc eee " />
+        <parameter name="result" value="successfully" />
+        <classes>
+            <class name="dataDriven.FillinContactFormTest" />
+        </classes>
+    </test>
+    <test name="dataVerificatiefail">
+        <parameter name="subject" value="bijn akleaa" />
+        <parameter name="email" value="rklamerpolteq.com" />
+        <parameter name="orderId" value="3333" />
+        <parameter name="message" value="rrfvc eee " />
+        <parameter name="result" value="successfully" />
+        <classes>
+            <class name="dataDriven.FillinContactFormTest" />
+        </classes>
+    </test>
+    <test name="dataVerificatie2">
+        <parameter name="subject" value="bijn akleaa" />
+        <parameter name="email" value="rklamer@polteq.com" />
+        <parameter name="orderId" value="" />
+        <parameter name="message" value="rrfvc eee " />
+        <parameter name="result" value="successfully" />
+        <classes>
+            <class name="dataDriven.FillinContactFormTest" />
+        </classes>
+    </test>
+</suite>
