@@ -1,21 +1,21 @@
-package test.example;
+package testShopScenario;
 
 import basic.BrowserFactoryAdvanced;
-//import basic.BrowserFactoryMedior;
-import io.github.bonigarcia.wdm.ChromeDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-//import basic.BrowserFactoryBasic;
+import org.testng.annotations.Parameters;
 
-import static java.lang.Thread.*;
+import java.util.concurrent.TimeUnit;
 
-public class TestShopScenario {
+import static java.lang.Thread.sleep;
 
-    public WebDriver driver;
+public class testShopScenarioParameters {
+    protected WebDriver driver;
+
+
 
     public String logMeIn(String soortAccount) throws InterruptedException {
         String emailAccount = "renze.klamer@polteq.com";
@@ -37,20 +37,19 @@ public class TestShopScenario {
         String myaccount = driver.findElement(By.className("account")).getText();
         return myaccount;
     }
+//    @Parameters("browser")
 
     @BeforeMethod(alwaysRun = true)
-    public void setmeUp(BrowserFactoryAdvanced.BootCampBrowser browser) {
-//        driver = BrowserFactoryAdvanced.getDriver(BrowserFactoryAdvanced.BootCampBrowser.CHROME );
-        driver = BrowserFactoryAdvanced.getDriver(browser );
-        //driver =BrowserFactoryMedior.getDriver("Chrome");
-        //driver = BrowserFactoryBasic.getDriver("chrome");
-        //driver.manage().
-        // open de website
-        String urlTest = "https://techblog.polteq.com/testshop/index.php";
-        driver.get(urlTest);
+    public void setUp() {
 
+//        driver = BrowserFactoryAdvanced.getDriver(BrowserFactoryAdvanced.BootCampBrowser.valueOf(browser));
+        driver = BrowserFactoryAdvanced.getDriver(BrowserFactoryAdvanced.BootCampBrowser.CHROME);
+
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+        driver.get("https://techblog.polteq.com/testshop/index.php");
     }
-
 
     @AfterMethod(alwaysRun = true)
     public void tearmeDown(ITestResult ifFailure) {
@@ -61,4 +60,3 @@ public class TestShopScenario {
 
     }
 }
-

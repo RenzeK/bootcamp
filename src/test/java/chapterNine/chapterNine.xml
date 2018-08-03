@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Suite" parallel="none">
+    <test name="loginverificatie">
+
+        <parameter name="user" value="rklamer@polteq.com" />
+        <parameter name="passwrd" value="Mijn-1956" />
+        <parameter name="result" value="successfully" />
+        <classes>
+            <class name="chapterNine.LoginTest" />
+        </classes>
+    </test>
+</suite>
